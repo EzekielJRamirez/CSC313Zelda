@@ -1,0 +1,47 @@
+This page is to give more information on each assignment
+
+generate random numbers from 0 to max
+        Random r = new Random();
+        int val = r.nextInt(max);
+
+rounding, ceiling and floor
+    __   __
+    |     | ceiling rounding rounds up a value to next whole unit
+
+    |_ _| floor rounds number down to previous whole unit
+
+shortcut commands
+shift + ctrl + f10  --> play main method in the program
+shift + f10         --> play the whole page including every class of the program
+                        you are looking at. also plays main method too
+ctrl + alt + l      --> cleans the code to look nice
+alt + f12           --> open terminal
+
+
+/* Git commands */
+git add --all
+git commit -m “Adding all files”
+git push
+
+HOW TO CLONE
+* command to clone from specific branch in terminal
+* into current project
+* git clone -b branchName url newFolderName
+
+1. click "new project from version control" in intelliJ
+2. paste link into html box
+3. doesn't need to use git command
+
+git remote -v
+! checks the origin of a project
+
+git remote add upstream [url]
+! adds reference to source of forked project
+
+git fetch upstream
+git checkout master
+
+git merge upstream/master
+
+git status
+git diff
