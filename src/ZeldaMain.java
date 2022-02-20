@@ -1099,5 +1099,244 @@ public class ZeldaMain {
             internalangle = 0.0;
             coords = new Vector<Double>();
         }
-        //missing a closing curly brace but it is in collin's section we are fine
+
+        public double getX() {
+            return x;
+        }
+
+        public double getY() {
+            return y;
+        }
+
+        public double getlasposx() {
+            return lastposX;
+        }
+
+        public double getlastposy() {
+            return lastposY();
+        }
+
+        public void setlasposx(double input) {
+            lastposx = input;
+        }
+
+        public void setlastposy(double input) {
+            lastposy = input;
+        }
+
+        public double getWidth() {
+            return xwidth;
+        }
+
+        public double getHeight() {
+            return yheight;
+        }
+
+        public double getAngle () {
+            return angle ;
+        }
+
+        public double getInternalAngle () {
+            return internalangle ;
+        }
+
+        public void setAngle ( double angleinput ) {
+            angle = angleinput ;
+        }
+
+        public void setInternalAngle ( double internalangleinput ) {
+            internalangle = internalangleinput ;
+        }
+
+        public Vector<Double> getCoords () {
+            return coords ;
+        }
+
+        public void setCoords ( Vector<Double> coordsinput ) {
+            coords = coordsinput ;
+            generateTriangles() ;
+            //p rin tT rian gl e s ( ) ;
+        }
+
+        public int getMaxFrames ( ) {
+            return maxFrames ;
+        }
+
+        public void setMaxFrames ( int input ) {
+            maxFrames = input ;
+        }
+
+        public int getCurrentFrame ( ) {
+            return currentFrame ;
+        }
+
+        public void setCurrentFrame ( int input ) {
+            currentFrame = input ;
+        }
+
+        public Boolean getBounce ( ) {
+            return bounce ;
+        }
+
+        public void setBounce ( Boolean input ) {
+            bounce = input ;
+        }
+
+        public int getLife ( ) {
+            return life ;
+        }
+
+        public void setLife ( int input ) {
+            life = input ;
+        }
+
+        public int getMaxLife ( ) {
+            return maxLife ;
+        }
+
+        public void setMaxLife ( int input ) {
+            maxLife = input ;
+        }
+
+        public int getDropLife ( ) {
+            return dropLife ;
+        }
+
+        public void setDropLife ( int input ) {
+            dropLife = input ;
+        }
+
+        public void updateBounce ( ) {
+            if ( getBounce() ) {
+                moveto ( getlastposx( ) , getlastposy ( ) ) ;
+            } else {
+                setlastposx ( getX ( ) ) ;
+                setlastposy ( getY ( ) ) ;
+            }
+            setBounce ( false ) ;
+        }
+
+        public void updateCurrentFrame ( ) {
+            currentFrame = ( currentFrame + 1 ) % maxFrames ;
+        }
+
+        public void generateTriangles ( ) {
+            triangles = new Vector<Double>( ) ;
+            // format : (0 , 1) , (2 , 3) , (4 , 5) i s the ( x , y ) coords o f a
+            // t ri a n gl e .
+            // ge t cen ter poin t o f a l l coordina tes .
+            comX = getComX ( ) ;
+            comY = getComY ( ) ;
+            for ( int i = 0 ; i < coords.size( ) ; i = i + 2 ) {
+                triangles.addElement ( coords.elementAt ( i ) ) ;
+                triangles.addElement ( coords.elementAt ( i +1) ) ;
+                triangles.addElement ( coords.elementAt ( ( i +2) % coords.size( ) ));
+                triangles.addElement ( coords.elementAt ( ( i +3) % coords.size( ) ));
+                triangles.addElement (comX ) ;
+                triangles.addElement (comY ) ;
+            }
+        }
+
+        public void printTriangles ( ) {
+            for ( int i = 0 ; i < triangles.size( ) ; i = i + 6 ) {
+                System.out.print( "p0x : " + triangles.elementAt ( i ) + " , p0y : " + triangles.elementAt ( i +1) ) ;
+                System.out.print( " p1x : " + triangles.elementAt ( i +2) + " , p1y :" + triangles.elementAt ( i +3) ) ;
+                System.out.println( " p2x : " + triangles.elementAt ( i +4) + " , p2y : " + triangles.elementAt ( i +5) ) ;
+            }
+        }
+
+        public double getComX ( ) {
+            double ret = 0 ;
+            if ( coords.size ( ) > 0 ) {
+                for ( int i = 0 ; i < coords.size( ) ; i = i + 2 ) {
+                    ret = ret + coords.elementAt ( i ) ;
+                }
+                ret = ret / ( coords.size( ) / 2.0 ) ;
+            }
+            return ret ;
+        }
+
+        public double getComY ( ) {
+            double ret = 0 ;
+            if ( coords.size( ) > 0 ) {
+                for ( int i = 1 ; i < coords.size( ) ; i = i + 2 ) {
+                    ret = ret + coords.elementAt ( i ) ;
+                }
+                ret = ret / ( coords.size( ) / 2.0 ) ;
+            }
+            return ret ;
+        }
+
+        public void move ( double xinput , double yinput ) {
+            x = x + xinput ;
+            y = y + yinput ;
+        }
+
+        public void moveto ( double xinput , double yinput ) {
+            x = xinput ;
+            y = yinput ;
+        }
+
+        public int screenWrap ( double leftEdge , double rightEdge , double topEdge , double bottomEdge ) {
+            int ret = 0 ;
+            if ( x > rightEdge ) {
+                moveto ( leftEdge , getY ( ) ) ;
+                ret = 1 ;
+            }
+            if ( x < leftEdge ) {
+                moveto ( rightEdge , getY ( ) ) ;
+                ret = 2 ;
+            }
+            if ( y > bottomEdge ) {
+                moveto ( getX ( ) , topEdge ) ;
+                ret = 3 ;
+            }
+            if ( y < topEdge ) {
+                moveto ( getX ( ) , bottomEdge ) ;
+                ret = 4 ;
+            }
+            return r e t ;
+        }
+
+        public void rotate ( double angleinput ) {
+            angle = angle + angleinput ;
+            while ( angle > twoPi ) {
+                angle = angle − twoPi ;
+            }
+            while ( angle < 0 ) {
+                angle = angle + twoPi ;
+            }
+        }
+
+        public void spin ( double internalangleinput ) {
+            internalangle = internalangle + internalangleinput;
+            while (internalangle > twoPi ){
+                internalangle = internalangle −twoPi;
+            }
+            while (internalangle< 0 ) {
+                internalangle = internalangle + twoPi;
+            }
+        }
+
+        private double x ;
+        private double y ;
+        private double lastposx ;
+        private double lastposy ;
+        private double xwidth ;
+        private double yheight ;
+        private double angle ; // in Radians
+        private double internale ; // in Radians
+        private Vector<Double> coords ;
+        private Vector<Double> triangles ;
+        private double comX;
+        private double comY ;
+        private int maxFrames ;
+        private int currentFrame ;
+        private int life;
+        private int maxLife ;
+        private int dropLife ;
+        private Boolean bounce ;
+    }
+
+    // ishan is working on next section starting from page 146
 }
