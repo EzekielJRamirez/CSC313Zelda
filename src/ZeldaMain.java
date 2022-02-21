@@ -1300,7 +1300,7 @@ public class ZeldaMain {
                 moveto(getX(), bottomEdge);
                 ret = 4;
             }
-            return r e t;
+            return ret;
         }
 
         public void rotate(double angleinput) {
@@ -1314,7 +1314,7 @@ public class ZeldaMain {
         }
 
         public void spin(double internalangleinput) {
-            internalangle = internalangle + internalangleinput;
+            double internalangle = internalangle + internalangleinput;
             while (internalangle > twoPi) {
                 internalangle = internalangle −twoPi;
             }
