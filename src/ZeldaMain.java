@@ -41,7 +41,7 @@ import java.awt.Graphics2D;
 import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
-
+// g1 g2 h1 h2 i1
 public class ZeldaMain {
 
     public void Zelda() {
@@ -70,18 +70,21 @@ public class ZeldaMain {
         level = 3;
         audiolifetime = new Long(78000);
         dropLifeLifetime = new Long(1000);
+
         try {
             xdimKI = 16;
             ydimKI = 16;
             backgroundKI = new Vector<Vector<BufferedImage>>();
+
             for (int i = 0; i < ydimKI; i++) {
                 Vector<BufferedImage> temp = new Vector<>();
                 for (int j = 0; j < xdimKI; j++) {
-                    BufferedImage tempImg = ImageIO.read(new File("blank.png"));
+                    BufferedImage tempImg = ImageIO.read(new File("src/assets/blank.png"));
                     temp.addElement(tempImg);
                 }
                 backgroundKI.addElement(temp);
             }
+
             for (int i = 0; i < backgroundKI.size(); i++) {
                 for (int j = 0; j < backgroundKI.elementAt(i).size(); j++) {
                     if ((j == 5 && i == 10 || (j == 5 && i == 11) || (j == 6 && i == 10) || (j == 6 && i == 11) || (j == 7 && i == 10) || (j == 7 && i == 11) || (j == 8 && i == 9) || (j == 8 && i == 10))) {
@@ -95,7 +98,7 @@ public class ZeldaMain {
                         }
                         filename = filename + i + ".png";
                         //TODO add filenames to files
-                        backgroundKI.elementAt(i).set(j, ImageIO.read(new File(filename)));
+                        backgroundKI.elementAt(i).set(j, ImageIO.read(new File("src/assets/" + filename)));
                     }
                 }
             }
@@ -138,7 +141,7 @@ public class ZeldaMain {
             for (int i = 0; i < ydimTC; i++) {
                 Vector<BufferedImage> temp = new Vector<>();
                 for (int j = 0; j < xdimTC; j++) {
-                    BufferedImage tempImg = ImageIO.read(new File("blank.png"));
+                    BufferedImage tempImg = ImageIO.read(new File("src/assets/blank.png"));
                     temp.addElement(tempImg);
 
                 }
@@ -170,7 +173,7 @@ public class ZeldaMain {
                             filename = filename + "O";
                         }
                         filename = filename + i + ".png";
-                        backgroundTC.elementAt(i).set(j, ImageIO.read(new File(filename)));
+                        backgroundTC.elementAt(i).set(j, ImageIO.read(new File("src/assets/" + filename)));
                     }
                 }
             }
@@ -183,37 +186,37 @@ public class ZeldaMain {
                 }
                 wallsTC.add(temp);
             }
-            player = ImageIO.read(new File("link00.png"));
+            player = ImageIO.read(new File("src/assets/link00.png"));
 
             link = new Vector<BufferedImage>();
             for (int i = 0; i < 72; i++) {
                 if (i < 10) {
                     String filename = "link0" + i + ".png";
-                    link.addElement(ImageIO.read(new File(filename)));
+                    link.addElement(ImageIO.read(new File("src/assets/"+filename)));
                 } else {
                     String filename = "link" + i + ".png";
-                    link.addElement(ImageIO.read(new File(filename)));
+                    link.addElement(ImageIO.read(new File("src/assets/"+filename)));
                 }
             }
 
             bluepigEnemies = new Vector<ImageObject>();
             bluepigEnemy = new Vector<BufferedImage>();
-            bluepigEnemy.addElement(ImageIO.read(new File("BPB1.png")));
-            bluepigEnemy.addElement(ImageIO.read(new File("BPB2.png")));
-            bluepigEnemy.addElement(ImageIO.read(new File("BPF1.png")));
-            bluepigEnemy.addElement(ImageIO.read(new File("BPF2.png")));
-            bluepigEnemy.addElement(ImageIO.read(new File("BPL1.png")));
-            bluepigEnemy.addElement(ImageIO.read(new File("BPL2.png")));
-            bluepigEnemy.addElement(ImageIO.read(new File("BPR1.png")));
-            bluepigEnemy.addElement(ImageIO.read(new File("BPR2.png")));
+            bluepigEnemy.addElement(ImageIO.read(new File("src/assets/BPB1.png")));
+            bluepigEnemy.addElement(ImageIO.read(new File("src/assets/BPB2.png")));
+            bluepigEnemy.addElement(ImageIO.read(new File("src/assets/BPF1.png")));
+            bluepigEnemy.addElement(ImageIO.read(new File("src/assets/BPF2.png")));
+            bluepigEnemy.addElement(ImageIO.read(new File("src/assets/BPL1.png")));
+            bluepigEnemy.addElement(ImageIO.read(new File("src/assets/BPL2.png")));
+            bluepigEnemy.addElement(ImageIO.read(new File("src/assets/BPR1.png")));
+            bluepigEnemy.addElement(ImageIO.read(new File("src/assets/BPR2.png")));
 
             bubblebossEnemies = new Vector<ImageObject>();
 
-            leftHeartOutline = ImageIO.read(new File("heartOutlineLeft.png"));
-            rightHeartOutline = ImageIO.read(new File("heartOutlineRight.png"));
+            leftHeartOutline = ImageIO.read(new File("src/assets/heartOutlineLeft.png"));
+            rightHeartOutline = ImageIO.read(new File("src/assets/heartOutlineRight.png"));
 
-            leftHeart = ImageIO.read(new File("heartLeft"));
-            rightHeart = ImageIO.read(new File("heartRight"));
+            leftHeart = ImageIO.read(new File("src/assets/heartLeft"));
+            rightHeart = ImageIO.read(new File("src/assets/heartRight"));
 
         } catch (IOException ioe) {
 
