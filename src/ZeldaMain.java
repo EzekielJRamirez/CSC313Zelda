@@ -42,6 +42,7 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 // g1 g2 h1 h2 i1
+// (1,7),(2,7),(1,8),(2,8),(1,9)
 public class ZeldaMain {
 
     public void Zelda() {
@@ -84,7 +85,7 @@ public class ZeldaMain {
                 }
                 backgroundKI.addElement(temp);
             }
-
+            // TODO implement new coords
             for (int i = 0; i < backgroundKI.size(); i++) {
                 for (int j = 0; j < backgroundKI.elementAt(i).size(); j++) {
                     if ((j == 5 && i == 10 || (j == 5 && i == 11) || (j == 6 && i == 10) || (j == 6 && i == 11) || (j == 7 && i == 10) || (j == 7 && i == 11) || (j == 8 && i == 9) || (j == 8 && i == 10))) {
@@ -111,7 +112,7 @@ public class ZeldaMain {
                 }
                 wallsKI.add(temp);
             }
-
+            // TODO implement new coords for walls
             for (int i = 0; i < wallsKI.size(); i++) {
                 for (int j = 0; j < wallsKI.elementAt(i).size(); j++) {
                     if (i == 5 && j == 10) {
@@ -147,7 +148,7 @@ public class ZeldaMain {
                 }
                 backgroundTC.addElement(temp);
             }
-
+            //TODO switch out the background pictures
             for (int i = 0; i < backgroundTC.size(); i++) {
                 for (int j = 0; j < backgroundTC.elementAt(i).size(); j++) {
                     if ((j == 0 && i == 2) || (j == 0 && i == 3) || (j == 0 && i
@@ -259,14 +260,14 @@ public class ZeldaMain {
         }
         try {
             if (backgroundState.substring(0, 2).equals("KI")) {
-                AudioInputStream ais = AudioSystem.getAudioInputStream(new File("KI.wav").getAbsoluteFile());
+                AudioInputStream ais = AudioSystem.getAudioInputStream(new File("src/assets/KI.wav").getAbsoluteFile());
                 clip = AudioSystem.getClip();
                 clip.open(ais);
                 clip.start();
                 lastAudioStart = System.currentTimeMillis();
                 audiolifetime = new Long(78000);
             } else if (backgroundState.substring(0, 2).equals("TC")) {
-                AudioInputStream ais = AudioSystem.getAudioInputStream(new File("TC.wav").getAbsoluteFile());
+                AudioInputStream ais = AudioSystem.getAudioInputStream(new File("src/assets/TC.wav").getAbsoluteFile());
                 clip = AudioSystem.getClip();
                 clip.open(ais);
                 clip.start();
@@ -428,7 +429,7 @@ public class ZeldaMain {
         bluepigEnemies.clear();
         bubblebossEnemies.clear();
     }
-
+    // TODO add coords to the enemies
     private static void generateEnemies(String backgroundState) {
         if (backgroundState.substring(0, 6).equals("KI0809")) {
             bluepigEnemies.addElement(new ImageObject(20, 90, 33, 33, 0));
@@ -507,7 +508,7 @@ public class ZeldaMain {
                     p1.setLife(newLife);
 
                     try {
-                        AudioInputStream ais = AudioSystem.getAudioInputStream(new File("hurt.wav").getAbsoluteFile());
+                        AudioInputStream ais = AudioSystem.getAudioInputStream(new File("src/assets/hurt.wav").getAbsoluteFile());
                         Clip hurtclip = AudioSystem.getClip();
                         hurtclip.open(ais);
                         hurtclip.start();
@@ -523,7 +524,7 @@ public class ZeldaMain {
             }
         }
     }
-
+    //TODO Add new file names for collisions
     private static class CollisionChecker implements Runnable {
 
         public void run() {
@@ -547,7 +548,7 @@ public class ZeldaMain {
                         playAudio(backgroundState);
                     }
                 }
-
+                // TODO use checksMoversAgainstWalls
                 // check player and enemies against walls
                 if (backgroundState.substring(0, 6).equals("KI0510")) {
                     checkMoversAgainstWalls(wallsKI.elementAt(5).elementAt(10));
@@ -1121,7 +1122,7 @@ public class ZeldaMain {
         public void setCoords(Vector<Double> coordsinput) {
             coords = coordsinput;
             generateTriangles();
-            //p rin tT rian gl e s ( ) ;
+            //printTriangles();
         }
 
         public int getMaxFrames() {
@@ -1317,6 +1318,7 @@ public class ZeldaMain {
     }
 
     public static void main(String[] args) {
+
         setup();
         appFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         appFrame.setSize(WINWIDTH + 1, WINHEIGHT + 85);
