@@ -91,11 +91,11 @@ public class ZeldaMain {
                     if ((j == 5 && i == 10 || (j == 5 && i == 11) || (j == 6 && i == 10) || (j == 6 && i == 11) || (j == 7 && i == 10) || (j == 7 && i == 11) || (j == 8 && i == 9) || (j == 8 && i == 10))) {
                         String filename = "KI";
                         if (j < 10) {
-                            filename = filename + "O";
+                            filename = filename + "0";
                         }
                         filename = filename + j;
                         if (i < 10) {
-                            filename = filename + "O";
+                            filename = filename + "0";
                         }
                         filename = filename + i + ".png";
                         //TODO add filenames to files
@@ -167,11 +167,11 @@ public class ZeldaMain {
 
                         String filename = "TC";
                         if (j < 10) {
-                            filename = filename + "O";
+                            filename = filename + "0";
                         }
                         filename = filename + j;
                         if (i < 10) {
-                            filename = filename + "O";
+                            filename = filename + "0";
                         }
                         filename = filename + i + ".png";
                         backgroundTC.elementAt(i).set(j, ImageIO.read(new File("src/assets/" + filename)));
@@ -190,7 +190,7 @@ public class ZeldaMain {
             player = ImageIO.read(new File("src/assets/link00.png"));
 
             link = new Vector<BufferedImage>();
-            for (int i = 0; i < 72; i++) {
+            for (int i = 0; i < 72; i++) { //TODO what is this?!
                 if (i < 10) {
                     String filename = "link0" + i + ".png";
                     link.addElement(ImageIO.read(new File("src/assets/"+filename)));
@@ -429,9 +429,10 @@ public class ZeldaMain {
         bluepigEnemies.clear();
         bubblebossEnemies.clear();
     }
-    // TODO add coords to the enemies
+        // TODO add coords to the enemies
     private static void generateEnemies(String backgroundState) {
-        if (backgroundState.substring(0, 6).equals("KI0809")) {
+        if (backgroundState.substring(0, 7).equals("KI0809")) {
+            System.out.println("Enemies were put here!");
             bluepigEnemies.addElement(new ImageObject(20, 90, 33, 33, 0));
             bluepigEnemies.addElement(new ImageObject(250, 230, 33, 33, 0));
         }
@@ -548,7 +549,7 @@ public class ZeldaMain {
                         playAudio(backgroundState);
                     }
                 }
-                // TODO use checksMoversAgainstWalls
+                // TODO use checksMoversAgainstWalls and add new coordinates
                 // check player and enemies against walls
                 if (backgroundState.substring(0, 6).equals("KI0510")) {
                     checkMoversAgainstWalls(wallsKI.elementAt(5).elementAt(10));
@@ -911,6 +912,7 @@ public class ZeldaMain {
                 clearEnemies();
                 generateEnemies(backgroundState);
             } catch (java.lang.NullPointerException jlnpe) {
+                System.out.println("No enemies here!");
             }
             p1 = new ImageObject(p1originalX, p1originalY, p1width, p1height, 0.0);
             p1velocity = 0.0;
